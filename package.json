@@ -15,6 +15,10 @@
   "bugs": {
     "url": "https://github.com/ezio-auditore/BlogFullStack/issues"
   },
+  "engines": {
+    "node": "6.9.1"
+  },
+
   "homepage": "https://github.com/ezio-auditore/BlogFullStack#readme",
   "dependencies": {
     "body-parser": "^1.15.2",
