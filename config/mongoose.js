@@ -6,7 +6,7 @@ module.exports = function(){
         if(err)
             console.log('error connecting to db '+err);
         else{
-            console.log('COnnected to db');
+            console.log('Connected to db');
         }
     });
     return db;

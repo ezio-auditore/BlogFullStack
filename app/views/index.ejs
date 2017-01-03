@@ -1,10 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%= title %></title>
+    <title><%= title1 +' ' +title2 %></title>
+   <!-- <link rel="stylesheet" href="css/arc-reactor.css">-->
+   <%- include includes/scripts.ejs %>
+   <%- include includes/plugins.ejs %>
+   <%- include includes/style.ejs %>
 </head>
 <body>
-    <img src="img/logo.png", alt="logo">
-<h1><%= title %></h1>
+<%- include includes/header.ejs %>
+<!--Arc reactor-->
+<!--<div id="arc_container">
+  <div class="arc_reactor">
+    <div class="case_container">
+      <div class="e7">
+        <div class="semi_arc_3 e5_1">
+          <div class="semi_arc_3 e5_2">
+            <div class="semi_arc_3 e5_3">
+              <div class="semi_arc_3 e5_4"></div>
+            </div>
+          </div>
+        </div>
+        <div class="core2"></div>
+      </div>
+      <ul class="marks">
+        <li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li>
+        <li></li><li></li><li></li><li></li><li></li><li></li>
+      </ul>
+    </div>
+  </div>
+</div>-->
+<%- include includes/hero.ejs %>
+<%- include includes/footer.ejs %>
 </body>
 </html>
