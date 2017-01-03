@@ -9,5 +9,6 @@ module.exports = function(){
             console.log('Connected to db');
         }
     });
+    require("../app/models/user.server.model");
     return db;
 }
