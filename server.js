@@ -2,10 +2,11 @@
  * Created by tonyStark on 1/2/2017.
  */
 
-var express = require('./config/express');
+var express = require('./config/express'),
+    mongoose = require("./config/mongoose");
 
 var app = express();
-
+var db = mongoose();
 app.listen(process.env.PORT||3000);
 module.exports = app;
 

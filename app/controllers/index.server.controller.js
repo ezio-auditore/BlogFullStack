@@ -9,6 +9,10 @@ exports.render = function(req,res){
     }
     req.session.lastVisit = new Date();
     res.render('index',{
-        title : 'Hello Mr.Stark'
+        title1 : 'Stark',
+        title2:'App',
+        hero_desc : 'A social Platform for DEVs and hobbyists alike',
+        signup_url : '',
+        login_url : ''
     });
 }
