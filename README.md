@@ -7,8 +7,8 @@ Propsed end time:15th Jan 2017
 
 I will be continuously deploying in heroku with each new build.
 
-Heroku URL :https://stark-blog.herokuapp.com/
-
+Heroku Production URL :https://stark-blog.herokuapp.com/
+Heroku Dev Url : https://stark-blog-development.herokuapp.com/
 
 =========
 connect to mongo shell mongo ds149278.mlab.com:49278/blog_full_stack -u admin -p admin
