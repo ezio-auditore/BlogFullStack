@@ -12,7 +12,7 @@ exports.render = function(req,res){
         title1 : 'Stark',
         title2:'App',
         hero_desc : 'A social Platform for DEVs and hobbyists alike',
-        signup_url : '',
+        signup_url : '/signup',
         login_url : ''
     });
 }
