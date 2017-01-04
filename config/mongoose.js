@@ -9,5 +9,7 @@ module.exports = function(){
             console.log('Connected to db');
         }
     });
+    require("../app/models/user.server.model");
+    require("../app/models/posts.server.model");
     return db;
 }
