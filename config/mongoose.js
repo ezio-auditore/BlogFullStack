@@ -10,5 +10,6 @@ module.exports = function(){
         }
     });
     require("../app/models/user.server.model");
+    require("../app/models/posts.server.model");
     return db;
 }

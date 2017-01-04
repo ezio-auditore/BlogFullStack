@@ -1,6 +1,6 @@
 var usersController = require("../controllers/users.server.controller");
 
-module.exports =function(app){
+module.exports = function(app){
     app.route('/users')
     .post(usersController.create)
     .get(usersController.find);
