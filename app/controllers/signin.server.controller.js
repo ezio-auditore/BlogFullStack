@@ -3,9 +3,9 @@
  */
 exports.render = function(req,res){
     res.render('signup',{
-        signup_title : 'Sign up',
+        signup_title : 'Login',
         title1 : 'Stark',
         title2:'App',
-        referer:'signup'
+        referer:'login'
     })
 }
