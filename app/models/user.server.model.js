@@ -29,7 +29,7 @@ var UserSchema = new Schema({
         type : String,
         required : 'Provider is required'
     },
-    providerId : String,
+    providerID : String,
     providerData:{},
     role : {
         type : String,
@@ -46,6 +46,9 @@ UserSchema.methods.authenticate = function(password){
 }
 
 UserSchema.virtual('fullName').get(function(){
+    if(this.provider === 'google'){
+        return this.providerData.name.givenName + ' ' + this.lastName;
+    }
     return this.firstName + ' ' + this.lastName;
 }).set(function(fullName){
     var splitName = fullName.split(' ');
@@ -68,7 +71,7 @@ UserSchema.methods.hashPassword = function(password){
 };
 
 
-/*UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
+UserSchema.statics.findUniqueUsername = function(username, suffix, callback) {
     var _this = this;
     var possibleUsername = username + (suffix || '');
 
@@ -85,7 +88,7 @@ UserSchema.methods.hashPassword = function(password){
             callback(null);
         }
     });
-};*/
+};
 UserSchema.set('toJSON',{
     getters :true,
     setters :true

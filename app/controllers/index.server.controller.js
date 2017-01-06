@@ -15,6 +15,7 @@ exports.render = function(req,res){
         signup_url : '/signupAuth',
         login_url : '/loginPage',
         userFullName : req.user ? req.user.fullName : '',
-        logout_url :'/logout'
+        logout_url :'/logout',
+        google_signUp_url : '/oauth/google'
     });
 }

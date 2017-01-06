@@ -15,4 +15,5 @@ module.exports = function(){
     });
 
     require('./strategies/local')();
+    require('./strategies/google')();
 }
