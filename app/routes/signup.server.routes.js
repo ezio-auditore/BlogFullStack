@@ -4,6 +4,23 @@
 module.exports =function(app){
     var signup = require('../controllers/signup.server.controller');
     var login = require('../controllers/signin.server.controller');
-    app.get('/signup',signup.render);
-    app.get('/login',login.render);
+    //var usersController = require("../controllers/users.server.controller");
+    var passport = require("passport");
+    app.get('/signupPage',signup.render);
+    app.get('/loginPage',login.render);
+    
+     app.route('/signupAuth')
+        .get(signup.renderSignup)
+        .post(signup.signup);
+    
+    app.route('/loginAuth')
+        .get(signup.renderSignin)
+        .post(passport.authenticate('local',{
+            successRedirect :'/',
+            failureRedirect : '/loginAuth',
+            failureFlash : true
+        }));
+    
+    app.route('/logout')
+        .get(signup.signout);
 }

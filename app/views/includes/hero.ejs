@@ -2,10 +2,15 @@
         <div class="container text-center">
             <h2 class="title"><%= title1 %><span class="highlight"><%= title2 %></span></h2>
             <p class="intro"><%= hero_desc %></p>
+            <% if(userFullName){%>
+            <span class="highlight">Hello <%= userFullName %></span>
+                <a class="btn btn-cta-primary" href="<%= logout_url %>" >Logout</a>
+            <% } else { %>
             <div class="btns">
                 <a class="btn btn-cta-secondary" href="<%= signup_url %>" >Signup</a>
                 <a class="btn btn-cta-primary" href="<%= login_url %>" >Login</a>
             </div>
+            <% } %>
             <ul class="meta list-inline">
                 <li><a class="github-button" href="https://github.com/ezio-auditore/BlogFullStack" target="_blank">View on GitHub</a></li>
             </ul><!--//meta-->

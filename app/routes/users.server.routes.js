@@ -1,5 +1,4 @@
 var usersController = require("../controllers/users.server.controller");
-
 module.exports = function(app){
     app.route('/users')
     .post(usersController.create)
@@ -9,7 +8,9 @@ module.exports = function(app){
         .get(usersController.read)
         .put(usersController.update)
         .delete(usersController.delete);
-        
+    
    
+        
+    
     app.param('userID',usersController.userByID);
 }
