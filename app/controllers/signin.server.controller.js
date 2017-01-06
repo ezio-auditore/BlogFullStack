@@ -6,6 +6,7 @@ exports.render = function(req,res){
         signup_title : 'Login',
         title1 : 'Stark',
         title2:'App',
-        referer:'login'
+        referer:'login',
+        messages : []
     })
 }
