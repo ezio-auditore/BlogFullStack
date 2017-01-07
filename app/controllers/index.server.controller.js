@@ -14,7 +14,8 @@ exports.render = function(req,res){
         hero_desc : 'A social Platform for DEVs and hobbyists alike',
         signup_url : '/signupAuth',
         login_url : '/loginPage',
-        userFullName : req.user ? req.user.fullName : '',
-        logout_url :'/logout'
+        userFullName : req.user ? req.user.fullName.split(' ')[0] : '',
+        logout_url :'/logout',
+        google_signUp_url : '/oauth/google'
     });
 }

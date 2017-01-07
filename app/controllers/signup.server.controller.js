@@ -86,7 +86,40 @@ exports.signup = function(req,res,next){
     }
 };
 exports.signout = function(req,res){
+    console.log(req.user.fullName+' has logged out');
     req.logout();
     res.redirect('/');
 }
 
+exports.saveOAuthUserProfile = function(req,res,profile,done){
+    var User = require("mongoose").model('User');
+    User.findOne({
+        provider : profile.provider,
+        providerId : profile.providerId,
+        email : profile.email
+    },function(err,user){
+        if(err)
+            return done(err);
+        else{
+            if(!user){
+              
+               var possibleUsername = profile.username || ((profile.email) ? profile.email.split('@')[0] : '');
+               User.findUniqueUsername(possibleUsername,null,function(availableUsername){
+                   profile.username = availableUsername;
+                   user = new User(profile);
+                   user.save(function(err){
+                       if(err) {
+                       var message = getErrorMessages(err);
+                       console.log("Error in saving profile:"+message);
+                            req.flash('error',message);
+                            return res.redirect('/signupAuth');
+                       }
+                       console.log("Sending done after new-user save ")
+                       return done(err,user);
+                   });
+               });
+            }
+            return done(err,user);
+        }
+    });
+}
