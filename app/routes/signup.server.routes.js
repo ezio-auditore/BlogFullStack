@@ -31,6 +31,13 @@ module.exports =function(app){
         failureRedirect : '/signupAuth',
         successRedirect : '/'
     }));
+    app.get('/oauth/facebook',passport.authenticate('facebook',{
+        failureRedirect : '/signupAuth'
+    }));
+    app.get('/oauth/facebook/callback',passport.authenticate('facebook',{
+        failureRedirect : '/signupAuth',
+        successRedirect : '/'
+    }));
     
     app.route('/logout')
         .get(signup.signout);

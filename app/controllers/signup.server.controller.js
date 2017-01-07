@@ -114,7 +114,7 @@ exports.saveOAuthUserProfile = function(req,res,profile,done){
                             req.flash('error',message);
                             return res.redirect('/signupAuth');
                        }
-                       console.log("Sending done after new-user save ")
+                       console.log("Sending done after new-user save ");
                        return done(err,user);
                    });
                });
