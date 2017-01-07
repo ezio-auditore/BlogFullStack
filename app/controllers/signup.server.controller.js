@@ -86,7 +86,7 @@ exports.signup = function(req,res,next){
     }
 };
 exports.signout = function(req,res){
-    console.log(req.user+' has logged out');
+    console.log(req.user.fullName+' has logged out');
     req.logout();
     res.redirect('/');
 }
@@ -95,7 +95,8 @@ exports.saveOAuthUserProfile = function(req,res,profile,done){
     var User = require("mongoose").model('User');
     User.findOne({
         provider : profile.provider,
-        providerId : profile.providerId
+        providerId : profile.providerId,
+        email : profile.email
     },function(err,user){
         if(err)
             return done(err);
@@ -113,6 +114,7 @@ exports.saveOAuthUserProfile = function(req,res,profile,done){
                             req.flash('error',message);
                             return res.redirect('/signupAuth');
                        }
+                       console.log("Sending done after new-user save ")
                        return done(err,user);
                    });
                });
