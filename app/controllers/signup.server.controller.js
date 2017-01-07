@@ -112,14 +112,17 @@ exports.saveOAuthUserProfile = function(req,res,profile,done){
                        var message = getErrorMessages(err);
                        console.log("Error in saving profile:"+message);
                             req.flash('error',message);
-                            return res.redirect('/signupAuth');
+                            //res.redirect('/signupAuth');
+                            return done(err);
                        }
                        console.log("Sending done after new-user save ");
-                       return done(err,user);
+                       return done(null,user);
                    });
                });
             }
-            return done(err,user);
+            else{
+            return done(null,user);
+            }
         }
     });
 }
