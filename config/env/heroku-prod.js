@@ -12,7 +12,12 @@ module.exports ={
     facebook:{
         clientID :'1864017550505218',
         clientSecret : '37380ea978239bb424a1e1c36098269e',
-        callbackURL:'https://stark-blog.herokuapp.com/oauth/facebook/callback',
+        callbackURL:'/oauth/facebook/callback',
         profileFields: ['id', 'emails', 'first_name', 'last_name', 'gender']
+    },
+    heroku :{
+        api_key:'key-e603bc0f2eb0205d894656e8639981c6',
+        domain:'app7b039cf806744803aabb63cef2a8ea5e.mailgun.org',
+        receiver:'pupunmajumder@gmail.com;chattermohona93@yahoo.com'
     }
 }
