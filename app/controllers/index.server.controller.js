@@ -16,6 +16,7 @@ exports.render = function(req,res){
         login_url : '/loginPage',
         userFullName : req.user ? req.user.fullName.split(' ')[0] : '',
         logout_url :'/logout',
-        google_signUp_url : '/oauth/google'
+        google_signUp_url : '/oauth/google',
+        facebook_signUp_url : '/oauth/facebook'
     });
 }

@@ -96,7 +96,8 @@ exports.saveOAuthUserProfile = function(req,res,profile,done){
     User.findOne({
         provider : profile.provider,
         providerId : profile.providerId,
-        email : profile.email
+        email : profile.email,
+        username : profile.username
     },function(err,user){
         if(err)
             return done(err);
@@ -112,14 +113,17 @@ exports.saveOAuthUserProfile = function(req,res,profile,done){
                        var message = getErrorMessages(err);
                        console.log("Error in saving profile:"+message);
                             req.flash('error',message);
-                            return res.redirect('/signupAuth');
+                            //res.redirect('/signupAuth');
+                            return done(err);
                        }
-                       console.log("Sending done after new-user save ")
-                       return done(err,user);
+                       console.log("Sending done after new-user save ");
+                       return done(null,user);
                    });
                });
             }
-            return done(err,user);
+            else{
+            return done(null,user);
+            }
         }
     });
 }

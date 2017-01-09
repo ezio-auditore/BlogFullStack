@@ -66,6 +66,23 @@ UserSchema.pre('save', function(next) {
   }
   next();
 });
+
+UserSchema.post('save',function(next){
+var api_key = 'key-8042677eb9a30aad077d4ac0278267ae';
+var domain = 'app5e2ddfde8a004ceb88d4f081d5f389e8.mailgun.org';
+var mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+ 
+var data = {
+  from: 'jarvis@starkblog.com',
+  to: 'pupunmajumder@gmail.com;chatterjeedebjani93@yahoo.com',
+  subject: 'New User Signup',
+  text: this.email+' has signed up ' + ' with '+this.provider
+};
+ 
+mailgun.messages().send(data, function (error, body) {
+  console.log(body);
+});
+});
 UserSchema.methods.hashPassword = function(password){
     return crypto.pbkdf2Sync(password,this.salt,10000,64).toString('base64');
 };

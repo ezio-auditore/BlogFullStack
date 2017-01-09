@@ -8,5 +8,11 @@ module.exports ={
         clientID :'737063857541-rubjr446km2m9a7m7nmmdvli9iia2vgo.apps.googleusercontent.com' ,
         clientSecret :'6ABWL00OfY-V04e4cABL4Osd',
         callbackURL :'https://stark-blog-development.herokuapp.com/oauth/google/callback'
+    },
+    facebook:{
+        clientID :'1864017550505218',
+        clientSecret : '37380ea978239bb424a1e1c36098269e',
+        callbackURL:'https://stark-blog-development.herokuapp.com/oauth/facebook/callback',
+        profileFields: ['id', 'emails', 'first_name', 'last_name', 'gender']
     }
 }
