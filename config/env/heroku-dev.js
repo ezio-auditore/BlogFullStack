@@ -14,5 +14,10 @@ module.exports ={
         clientSecret : '37380ea978239bb424a1e1c36098269e',
         callbackURL:'https://stark-blog-development.herokuapp.com/oauth/facebook/callback',
         profileFields: ['id', 'emails', 'first_name', 'last_name', 'gender']
+    },
+     heroku :{
+        api_key:'key-8042677eb9a30aad077d4ac0278267ae',
+        domain:'app5e2ddfde8a004ceb88d4f081d5f389e8.mailgun.org',
+        receiver:'pupunmajumder@gmail.com;chattermohona93@yahoo.com'
     }
 }
