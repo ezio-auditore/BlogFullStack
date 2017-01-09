@@ -95,8 +95,9 @@ exports.saveOAuthUserProfile = function(req,res,profile,done){
     var User = require("mongoose").model('User');
     User.findOne({
         provider : profile.provider,
-        providerId : profile.providerId/*,
-        email : profile.email*/
+        providerId : profile.providerId,
+        email : profile.email,
+        username : profile.username
     },function(err,user){
         if(err)
             return done(err);
