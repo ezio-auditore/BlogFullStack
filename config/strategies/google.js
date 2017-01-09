@@ -10,7 +10,7 @@ module.exports = function(){
         clientSecret :config.google.clientSecret,
         callbackURL : config.google.callbackURL,
         passReqToCallback : true
-    },function(req,res,accessToken,refreshToken,profile,done){
+    },function(req,accessToken,refreshToken,profile,done){
         var providerData = profile._json;
         providerData.accessToken = accessToken;
         providerData.refreshToken = refreshToken;

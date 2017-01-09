@@ -6,7 +6,7 @@ exports.render = function(req,res){
         signup_title : 'Sign up',
         title1 : 'Stark',
         title2:'App',
-        referer:'signup',
+        referer:'login',
         messages : []
     })
 }
@@ -51,7 +51,7 @@ exports.renderSignup = function(req,res,next){
         signup_title : 'Signup',
         title1 : 'Stark',
         title2:'App',
-        referer:'signup',
+        referer:'login',
         messages : req.flash('error')
     });
     }else{
