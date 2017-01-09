@@ -12,6 +12,7 @@ module.exports ={
     facebook:{
         clientID :'1864017550505218',
         clientSecret : '37380ea978239bb424a1e1c36098269e',
-        callbackURL:'https://stark-blog-development.herokuapp.com/oauth/facebook/callback'
+        callbackURL:'https://stark-blog-development.herokuapp.com/oauth/facebook/callback',
+        profileFields: ['id', 'emails', 'first_name', 'last_name', 'gender']
     }
 }

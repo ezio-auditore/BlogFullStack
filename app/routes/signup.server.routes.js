@@ -31,10 +31,9 @@ module.exports =function(app){
         failureRedirect : '/signupAuth',
         successRedirect : '/'
     }));
-    app.get('/oauth/facebook',passport.authenticate('facebook',{
-        failureRedirect : '/signupAuth'
-    }));
+    app.get('/oauth/facebook',passport.authenticate('facebook',{scope: ['public_profile', 'email']}));
     app.get('/oauth/facebook/callback',passport.authenticate('facebook',{
+          
         failureRedirect : '/signupAuth',
         successRedirect : '/'
     }));
