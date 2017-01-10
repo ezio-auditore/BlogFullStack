@@ -37,6 +37,12 @@ var UserSchema = new Schema({
         enum : ['Admin','Owner','User'],
         default : 'User'
     },
+    gender : {
+        type : String,
+        default : 'Male'
+    },
+    image: String,
+    profile_pic:String,
     created : {
         type : Date,
         default :Date.now
@@ -65,6 +71,8 @@ UserSchema.pre('save', function(next) {
     this.password = this.hashPassword(this.password);
     //console.log(this.password);
   }
+    this.image = this.image ? this.image :'http://eightbitavatar.herokuapp.com/?id='+this._id+'&s='+this.gender.toLowerCase()+'&size=100';
+    this.profile_pic = this.profile_pic ? this.profile_pic : 'http://eightbitavatar.herokuapp.com/?id='+this._id+'&s='+this.gender.toLowerCase()+'&size=200';
   next();
 });
 

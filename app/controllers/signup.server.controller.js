@@ -7,7 +7,8 @@ exports.render = function(req,res){
         title1 : 'Stark',
         title2:'App',
         referer:'login',
-        messages : []
+        messages : [],
+        userFullName :  req.user ? req.user.fullName.split(' ')[0] : ''
     })
 }
 var getErrorMessages = function(err){
@@ -39,7 +40,8 @@ exports.renderSignin = function(req,res,next){
         title1 : 'Stark',
         title2:'App',
         referer:'login',
-        messages : req.flash('error')|| req.flash('info')
+        messages : req.flash('error')|| req.flash('info'),
+        userFullName :  req.user ? req.user.fullName.split(' ')[0] : ''
     });
     }else{
         return res.redirect('/');
@@ -52,7 +54,8 @@ exports.renderSignup = function(req,res,next){
         title1 : 'Stark',
         title2:'App',
         referer:'login',
-        messages : req.flash('error')
+        messages : req.flash('error'),
+            user :  req.user ? req.user : ''
     });
     }else{
         return res.redirect('/');
@@ -106,6 +109,7 @@ exports.saveOAuthUserProfile = function(req,res,profile,done){
               
                var possibleUsername = profile.username || ((profile.email) ? profile.email.split('@')[0] : '');
                User.findUniqueUsername(possibleUsername,null,function(availableUsername){
+                   console.log('available user name'+availableUsername);
                    profile.username = availableUsername;
                    user = new User(profile);
                    user.save(function(err){
@@ -113,8 +117,8 @@ exports.saveOAuthUserProfile = function(req,res,profile,done){
                        var message = getErrorMessages(err);
                        console.log("Error in saving profile:"+message);
                             req.flash('error',message);
-                            //res.redirect('/signupAuth');
-                            return done(err);
+                            res.redirect('/signupAuth');
+                            //return done(err);
                        }
                        console.log("Sending done after new-user save ");
                        return done(null,user);

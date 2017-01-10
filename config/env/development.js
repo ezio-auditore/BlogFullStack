@@ -15,7 +15,7 @@ module.exports ={
         clientSecret : '37380ea978239bb424a1e1c36098269e',
         
         callbackURL:'https://fullstack-blog-kaustav-m.c9users.io/oauth/facebook/callback',
-        profileFields: ['id', 'emails', 'first_name', 'last_name', 'gender']
+        profileFields: ['id', 'emails', 'first_name', 'last_name', 'gender','photos']
     },
     heroku :{
         api_key:'key-8042677eb9a30aad077d4ac0278267ae',
