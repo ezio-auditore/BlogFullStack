@@ -24,7 +24,7 @@ module.exports = function(){
             providerID : profile.providerID,
             providerData :providerData,
             gender : profile.gender,
-            image : profile.image.url
+            image : providerData.image.url
         };
         signupController.saveOAuthUserProfile(req,res,providerUserProfile,done);
     }));
