@@ -22,7 +22,9 @@ module.exports = function(){
             username : profile.username,
             provider :'google',
             providerID : profile.providerID,
-            providerData :providerData
+            providerData :providerData,
+            gender : profile.gender,
+            image : profile.image.url
         };
         signupController.saveOAuthUserProfile(req,res,providerUserProfile,done);
     }));

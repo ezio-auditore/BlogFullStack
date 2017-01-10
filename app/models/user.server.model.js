@@ -1,7 +1,8 @@
 var mongoose = require("mongoose"),
     crypto = require('crypto'),
     Schema = mongoose.Schema,
-    config = require("../../config/config");
+    config = require("../../config/config"),
+    avatar = require('avatar-generator');
     
 var UserSchema = new Schema({
     firstName:String,
@@ -37,6 +38,11 @@ var UserSchema = new Schema({
         enum : ['Admin','Owner','User'],
         default : 'User'
     },
+    gender : {
+        type : String,
+        default : 'Male'
+    },
+    image: String,
     created : {
         type : Date,
         default :Date.now
@@ -65,6 +71,7 @@ UserSchema.pre('save', function(next) {
     this.password = this.hashPassword(this.password);
     //console.log(this.password);
   }
+    this.image = this.image ? this.image :avatar(this._id,this.gender,100);
   next();
 });
 
