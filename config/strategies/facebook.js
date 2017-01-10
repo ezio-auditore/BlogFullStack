@@ -27,7 +27,7 @@ module.exports = function(){
             provider :'facebook',
             providerID : profile.id,
             providerData :providerData,
-            gender : profile.gender
+            gender : providerData.gender
         };
         console.log('eamil:'+providerData.email)
         signupController.saveOAuthUserProfile(req,res,providerUserProfile,done);

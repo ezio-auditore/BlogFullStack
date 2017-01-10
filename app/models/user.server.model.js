@@ -71,7 +71,7 @@ UserSchema.pre('save', function(next) {
     this.password = this.hashPassword(this.password);
     //console.log(this.password);
   }
-    this.image = this.image ? this.image :avatar(this._id,this.gender,100);
+    //this.image = this.image ? this.image :avatar(this._id,this.gender,100);
   next();
 });
 

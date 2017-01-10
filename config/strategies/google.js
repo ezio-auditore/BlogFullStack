@@ -10,8 +10,10 @@ module.exports = function(){
         clientSecret :config.google.clientSecret,
         callbackURL : config.google.callbackURL,
         passReqToCallback : true
-    },function(req,accessToken,refreshToken,profile,done){
+    },function(req,res,accessToken,refreshToken,profile,done){
         var providerData = profile._json;
+        console.log(providerData);
+        console.log(profile);
         providerData.accessToken = accessToken;
         providerData.refreshToken = refreshToken;
         
@@ -19,14 +21,14 @@ module.exports = function(){
             firstName : profile.name.givenName,
             lastName : profile.name.familyName,
             email : profile.emails[0].value,
-            username : profile.username,
+            username : providerData.username,
             provider :'google',
             providerID : profile.providerID,
             providerData :providerData,
-            gender : profile.gender,
+            gender : providerData.gender,
             image : providerData.image.url
         };
-        signupController.saveOAuthUserProfile(req,providerUserProfile,done);
+        signupController.saveOAuthUserProfile(req,res,providerUserProfile,done);
     }));
 }
     

@@ -109,6 +109,7 @@ exports.saveOAuthUserProfile = function(req,res,profile,done){
               
                var possibleUsername = profile.username || ((profile.email) ? profile.email.split('@')[0] : '');
                User.findUniqueUsername(possibleUsername,null,function(availableUsername){
+                   console.log('available user name'+availableUsername);
                    profile.username = availableUsername;
                    user = new User(profile);
                    user.save(function(err){
@@ -116,8 +117,8 @@ exports.saveOAuthUserProfile = function(req,res,profile,done){
                        var message = getErrorMessages(err);
                        console.log("Error in saving profile:"+message);
                             req.flash('error',message);
-                            //res.redirect('/signupAuth');
-                            return done(err);
+                            res.redirect('/signupAuth');
+                            //return done(err);
                        }
                        console.log("Sending done after new-user save ");
                        return done(null,user);
