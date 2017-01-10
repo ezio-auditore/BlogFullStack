@@ -43,6 +43,7 @@ var UserSchema = new Schema({
         default : 'Male'
     },
     image: String,
+    profile_pic:String,
     created : {
         type : Date,
         default :Date.now
@@ -71,7 +72,8 @@ UserSchema.pre('save', function(next) {
     this.password = this.hashPassword(this.password);
     //console.log(this.password);
   }
-    //this.image = this.image ? this.image :avatar(this._id,this.gender,100);
+    this.image = this.image ? this.image :'http://eightbitavatar.herokuapp.com/?id='+this._id+'&s='+this.gender.toLowerCase()+'&size=100';
+    this.profile_pic = this.image ? this.image : 'http://eightbitavatar.herokuapp.com/?id='+this._id+'&s='+this.gender.toLowerCase()+'&size=200';
   next();
 });
 
