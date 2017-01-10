@@ -2,7 +2,7 @@
  * Created by tonyStark on 1/6/2017.
  */
 module.exports ={
-    sessionSecret : 'asdgh9346qen136@#@!hssDAJSD',
+    sessionSecret : 'asdgh9346qen136guyu6@#@!hssDAJSD',
     dbUrl : 'mongodb://admin:admin@ds149278.mlab.com:49278/blog_full_stack',
     google : {
         clientID :'737063857541-rubjr446km2m9a7m7nmmdvli9iia2vgo.apps.googleusercontent.com' ,
@@ -12,7 +12,7 @@ module.exports ={
     facebook:{
         clientID :'1749227905403953',
         clientSecret : '0748daf7cb83475cc7cb90d92adb00ce',
-        callbackURL:'/oauth/facebook/callback',
+        callbackURL:'https://stark-blog.herokuapp.com/oauth/facebook/callback',
         profileFields: ['id', 'emails', 'first_name', 'last_name', 'gender']
     },
     heroku :{
