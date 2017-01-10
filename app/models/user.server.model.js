@@ -1,8 +1,7 @@
 var mongoose = require("mongoose"),
     crypto = require('crypto'),
     Schema = mongoose.Schema,
-    config = require("../../config/config"),
-    avatar = require('avatar-generator');
+    config = require("../../config/config");
     
 var UserSchema = new Schema({
     firstName:String,
@@ -73,7 +72,7 @@ UserSchema.pre('save', function(next) {
     //console.log(this.password);
   }
     this.image = this.image ? this.image :'http://eightbitavatar.herokuapp.com/?id='+this._id+'&s='+this.gender.toLowerCase()+'&size=100';
-    this.profile_pic = this.image ? this.image : 'http://eightbitavatar.herokuapp.com/?id='+this._id+'&s='+this.gender.toLowerCase()+'&size=200';
+    this.profile_pic = this.profile_pic ? this.profile_pic : 'http://eightbitavatar.herokuapp.com/?id='+this._id+'&s='+this.gender.toLowerCase()+'&size=200';
   next();
 });
 
