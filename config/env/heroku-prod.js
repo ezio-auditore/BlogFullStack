@@ -13,7 +13,7 @@ module.exports ={
         clientID :'1749227905403953',
         clientSecret : '0748daf7cb83475cc7cb90d92adb00ce',
         callbackURL:'https://stark-blog.herokuapp.com/oauth/facebook/callback',
-        profileFields: ['id', 'emails', 'first_name', 'last_name', 'gender']
+         profileFields: ['id', 'emails', 'first_name', 'last_name', 'gender','photos']
     },
     heroku :{
         api_key:'key-e603bc0f2eb0205d894656e8639981c6',
