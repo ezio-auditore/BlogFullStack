@@ -7,6 +7,7 @@ exports.render = function(req,res){
         title1 : 'Stark',
         title2:'App',
         referer:'login',
-        messages : []
+        messages : [],
+        user :  req.user ? req.user : ''
     })
 }
