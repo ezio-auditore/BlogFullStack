@@ -97,8 +97,8 @@ exports.signout = function(req,res){
 exports.saveOAuthUserProfile = function(req,res,profile,done){
     var User = require("mongoose").model('User');
     User.findOne({
-        provider : profile.provider,
-        providerId : profile.providerId,
+        /*provider : profile.provider,
+        providerId : profile.providerId,*/
         email : profile.email/*,
         username : profile.username*/
     },function(err,user){
@@ -117,11 +117,12 @@ exports.saveOAuthUserProfile = function(req,res,profile,done){
                        var message = getErrorMessages(err);
                        console.log("Error in saving profile:"+message);
                             req.flash('error',message);
-                            res.redirect('/signupAuth');
-                            //return done(err);
-                       }
+                           return res.redirect('/signupAuth');
+                          // return done(err);
+                       }else{
                        console.log("Sending done after new-user save ");
                        return done(null,user);
+                       }
                    });
                });
             }

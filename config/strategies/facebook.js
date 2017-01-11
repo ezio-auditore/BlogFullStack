@@ -8,7 +8,7 @@ var passport = require('passport'),
     config = require('../config'),
     signupController = require("../../app/controllers/signup.server.controller.js");
 
-module.exports = function(){
+module.exports = function(req,res){
     passport.use(new FacebookStrategy({
         clientID : config.facebook.clientID,
         clientSecret :config.facebook.clientSecret,
@@ -23,7 +23,7 @@ module.exports = function(){
             firstName : profile.name.givenName,
             lastName : profile.name.familyName,
             email : profile.emails[0].value,
-            username : '',
+            username : providerData.username,
             provider :'facebook',
             providerID : profile.id,
             providerData :providerData,
