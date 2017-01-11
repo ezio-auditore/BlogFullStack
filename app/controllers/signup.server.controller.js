@@ -99,8 +99,8 @@ exports.saveOAuthUserProfile = function(req,res,profile,done){
     User.findOne({
         provider : profile.provider,
         providerId : profile.providerId,
-        email : profile.email,
-        username : profile.username
+        email : profile.email/*,
+        username : profile.username*/
     },function(err,user){
         if(err)
             return done(err);
