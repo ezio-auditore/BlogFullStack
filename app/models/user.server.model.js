@@ -9,6 +9,7 @@ var UserSchema = new Schema({
     email : {
         type : String,
         index : true,
+        unique :true,
         match : /.+\@.+\..+/
     },
     username : {

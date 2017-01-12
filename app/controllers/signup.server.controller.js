@@ -41,7 +41,8 @@ exports.renderSignin = function(req,res,next){
         title2:'App',
         referer:'login',
         messages : req.flash('error')|| req.flash('info'),
-        userFullName :  req.user ? req.user.fullName.split(' ')[0] : ''
+        userFullName :  req.user ? req.user.fullName.split(' ')[0] : '',
+        user :  req.user ? req.user : ''
     });
     }else{
         return res.redirect('/');
@@ -97,10 +98,10 @@ exports.signout = function(req,res){
 exports.saveOAuthUserProfile = function(req,res,profile,done){
     var User = require("mongoose").model('User');
     User.findOne({
-        provider : profile.provider,
-        providerId : profile.providerId,
-        email : profile.email,
-        username : profile.username
+        /*provider : profile.provider,
+        providerId : profile.providerId,*/
+        email : profile.email/*,
+        username : profile.username*/
     },function(err,user){
         if(err)
             return done(err);
@@ -117,11 +118,12 @@ exports.saveOAuthUserProfile = function(req,res,profile,done){
                        var message = getErrorMessages(err);
                        console.log("Error in saving profile:"+message);
                             req.flash('error',message);
-                            res.redirect('/signupAuth');
-                            //return done(err);
-                       }
+                           return res.redirect('/signupAuth');
+                          // return done(err);
+                       }else{
                        console.log("Sending done after new-user save ");
                        return done(null,user);
+                       }
                    });
                });
             }
