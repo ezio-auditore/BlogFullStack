@@ -41,7 +41,8 @@ exports.renderSignin = function(req,res,next){
         title2:'App',
         referer:'login',
         messages : req.flash('error')|| req.flash('info'),
-        userFullName :  req.user ? req.user.fullName.split(' ')[0] : ''
+        userFullName :  req.user ? req.user.fullName.split(' ')[0] : '',
+        user :  req.user ? req.user : ''
     });
     }else{
         return res.redirect('/');
