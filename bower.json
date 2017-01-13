@@ -1,0 +1,21 @@
+{
+  "name": "blog-full-stack",
+  "description": "Build a full stack functional blog using MongoDb,Express.js,Angular.js and Nodejs(MEAN)",
+  "main": "server.js",
+  "authors": [
+    "Kaustav Majumder"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/ezio-auditore/BlogFullStack",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.1",
+    "angular-route": "^1.6.1"
+  }
+}
