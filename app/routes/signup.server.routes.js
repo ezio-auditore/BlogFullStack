@@ -16,7 +16,7 @@ module.exports =function(app){
     app.route('/loginAuth')
         .get(signup.renderSignin)
         .post(passport.authenticate('local',{
-            successRedirect :'/',
+            successRedirect :'/dashboard',
             failureRedirect : '/loginAuth',
             failureFlash : true
         }));
@@ -29,13 +29,13 @@ module.exports =function(app){
     }));
     app.get('/oauth/google/callback',passport.authenticate('google',{
         failureRedirect : '/signupAuth',
-        successRedirect : '/'
+        successRedirect : '/dashboard'
     }));
     app.get('/oauth/facebook',passport.authenticate('facebook',{scope: ['public_profile', 'email']}));
     app.get('/oauth/facebook/callback',passport.authenticate('facebook',{
           
         failureRedirect : '/signupAuth',
-        successRedirect : '/'
+        successRedirect : '/dashboard'
     }));
     
     app.route('/logout')

@@ -25,7 +25,39 @@
         $('[data-toggle="popover"]').popover()
     })
 </script>
-
+<!--Angular modules-->
 <script src = "lib/angular/angular.js"></script>
 <script src = "lib/angular-route/angular-route.js"></script>
+<script src = "lib/angular-resource/angular-resource.js"></script>
+<!--Main angular module-->
 <script src = "app.js"></script>
+<!--Users scripts-->
+<script src = "users/users.client.module.js"></script>
+<!--<script src = "users/controllers/users.client.controller.js"></script>-->
+<script src = "users/services/authentication.client.service.js"></script>
+
+
+<!--Post Scripts-->
+<script src = "posts/post.client.module.js"></script>
+<script src = "posts/controllers/post.client.controller.js"></script>
+<script src = "posts/services/post.client.service.js"></script>
+
+
+<!--Bower modules-->
+<script src = "lib/toastr/toastr.js"></script>
+
+
+<!--Notification script-->
+<script src = "notify/notify.client.module.js"></script>
+<script src = "notify/services/notify.client.service.js"></script>
+
+
+
+
+<script type="text/javascript">
+       
+    window.user = <%- user || 'null' %>;
+ 
+  </script>
+  
+ 

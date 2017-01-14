@@ -3,6 +3,7 @@
             <h2 class="title"><%= title1 %><span class="highlight"><%= title2 %></span></h2>
             <p class="intro"><%= hero_desc %></p>
             <% if(user){%>
+           <% user = JSON.parse(user)%>
             <span class="highlight">Hello <%= user.fullName.split(' ')[0] %></span>
                 <a class="btn btn-cta-primary" href="<%= logout_url %>" >Logout</a>
             <% } else { %>

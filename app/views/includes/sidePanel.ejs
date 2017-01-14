@@ -1,0 +1,26 @@
+<div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
+    <% user = JSON.parse(user)%>
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="media">
+                        <div align="center">
+                            <img class="thumbnail img-responsive" src="<%= user.profile_pic%>" width="300px" height="300px">
+                        </div>
+                        <div class="media-body">
+                            <hr>
+                            <h3><strong>User Name</strong></h3>
+                            <p><%= user.username %></p>
+                            <!--<hr>
+                            <h3><strong>Location</strong></h3>
+                            <p>Earth</p>
+                            <hr>-->
+                            <h3><strong>Gender</strong></h3>
+                            <p><%= user.gender %></p>
+                            <hr>
+                            <h3><strong>Email</strong></h3>
+                            <p><%= user.email %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
