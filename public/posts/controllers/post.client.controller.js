@@ -1,4 +1,4 @@
-angular.module('Posts').controller('PostsControler',['$scope','$routeParams','$location','Authentication','PostsFactory',function($scope,$routeParams,$location,Authentication,PostsFactory){
+angular.module('Posts').controller('PostsController',['$scope','$routeParams','$location','Authentication','PostsFactory','notificationFactory',function($scope,$routeParams,$location,Authentication,PostsFactory,notificationFactory){
     $scope.authentication = Authentication;
     
     $scope.create = function(){
@@ -9,8 +9,10 @@ angular.module('Posts').controller('PostsControler',['$scope','$routeParams','$l
         
         post.$save(function(response){
             $location.path('posts/'+response._id);
+            notificationFactory.success("Succesfully posted");
         },function(errorResponse){
             $scope.error = errorResponse.data.message;
+            notificationFactory.error($scope.error);
         });
     };
     
@@ -29,6 +31,7 @@ angular.module('Posts').controller('PostsControler',['$scope','$routeParams','$l
            $location.path('posts/'+$scope.post._id) ;
         },function(errorResponse){
             $scope.error = errorResponse.data.message;
+            notificationFactory.error($scope.error);
         });
     };
     
@@ -38,6 +41,7 @@ angular.module('Posts').controller('PostsControler',['$scope','$routeParams','$l
                 for(var i in $scope.posts){
                     if($scope.posts[i] === post){
                         $scope.posts.splice(i,1);
+                        notificationFactory.success("Succesfully deleted post");
                     }
                 }
             });
@@ -45,6 +49,7 @@ angular.module('Posts').controller('PostsControler',['$scope','$routeParams','$l
         else{
             $scope.post.$remove(function(){
                $location.path('posts') ;
+               notificationFactory.success("Succesfully deleted post");
             });
         }
     }
