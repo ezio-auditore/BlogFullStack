@@ -8,6 +8,6 @@ exports.render = function(req,res){
         title2:'App',
         referer:'login',
         messages : [],
-        user :  req.user ? req.user : ''
+        user :  req.user ? JSON.stringify(req.user) : ''
     })
 }

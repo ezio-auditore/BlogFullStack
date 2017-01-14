@@ -4,16 +4,23 @@ var mongoose = require("mongoose"),
 var PostSchema = new Schema({
     title : {
         type :String,
-        required :true
+        trim :true,
+        default : '',
+        required :'Title cannot be blank'
     },
     content : {
         type :String,
+        default : '',
+        trim :true,
         required :true
     },
     author : {
         type : Schema.ObjectId,
         ref : 'User',
-        required :true
+    },
+    created :{
+        type : Date,
+        default : Date.now
     }
 });
 

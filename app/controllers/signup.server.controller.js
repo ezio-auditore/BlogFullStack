@@ -42,7 +42,7 @@ exports.renderSignin = function(req,res,next){
         referer:'login',
         messages : req.flash('error')|| req.flash('info'),
         userFullName :  req.user ? req.user.fullName.split(' ')[0] : '',
-        user :  req.user ? req.user : ''
+        user :  req.user ? JSON.stringify(req.user) : ''
     });
     }else{
         return res.redirect('/');
@@ -56,7 +56,7 @@ exports.renderSignup = function(req,res,next){
         title2:'App',
         referer:'login',
         messages : req.flash('error'),
-            user :  req.user ? req.user : ''
+            user :  req.user ? JSON.stringify(req.user) : ''
     });
     }else{
         return res.redirect('/');
@@ -132,4 +132,13 @@ exports.saveOAuthUserProfile = function(req,res,profile,done){
             }
         }
     });
+};
+
+exports.requiresLogin = function(req,res,next){
+    if(!req.isAuthenticated()){
+        return res.status(400).send({
+            message : 'User is not logged in'
+        });
+    }
+    next();
 }

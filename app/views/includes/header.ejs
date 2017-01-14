@@ -23,13 +23,14 @@
                         <li class="nav-item"><a class="scrollto" href="#license">License</a></li>                        
                         <li class="nav-item last"><a class="scrollto" href="#contact">Contact</a></li>
                         <% if(user){%>
+                         <% user_header = JSON.parse(user)%>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                     <span class="user-avatar pull-left" style="margin-right:8px; margin-top:-5px;">
-                                        <img src="<%= user.image%>" class="img-responsive img-circle" title="<%= user.fullName %>" alt="<%= user.fullName %>.starkblogprofilepic" width="30px" height="30px">
+                                        <img src="<%= user_header.image%>" class="img-responsive img-circle" title="<%= user_header.fullName %>" alt="<%= user_header.fullName %>.starkblogprofilepic" width="30px" height="30px">
                                     </span>
                                     <span class="user-name">
-                                        <%= user.fullName %>
+                                        <%= user_header.fullName %>
                                     </span>
                                     <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
@@ -37,14 +38,14 @@
                                         <div class="navbar-content">
                                             <div class="row">
                                                 <div class="col-md-5">
-                                                    <img src="<%= user.profile_pic%>" alt="<%= user.fullName %>" class="img-responsive" width="120px" height="120px" />
+                                                    <img src="<%= user_header.profile_pic%>" alt="<%= user_header.fullName %>" class="img-responsive" width="120px" height="120px" />
                                                     <p class="text-center small">
                                                         <a href="#">Change Photo</a></p>
                                                 </div>
                                                 <div class="col-md-7">
-                                                    <span> <%= user.fullName %></span>
+                                                    <span> <%= user_header.fullName %></span>
                                                     <p class="text-muted small">
-                                                        <%= user.email%></p>
+                                                        <%= user_header.email%></p>
                                                     <div class="divider">
                                                     </div>
                                                     <a href="#" class="btn btn-default btn-xs"><i class="fa fa-user-o" aria-hidden="true"></i> Profile</a>
