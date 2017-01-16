@@ -1,60 +1,56 @@
-exports.create = function(req,res,next){
+exports.create = function(req, res, next) {
     var User = require("mongoose").model('User');
     var user = new User(req.body);
-    user.save(function(err){
-       if(err)
+    user.save(function(err) {
+        if (err)
             return next(err);
-        else{
+        else {
             res.json(user);
         }
     });
 };
 
-exports.find = function(req,res,next){
+exports.find = function(req, res, next) {
     var User = require("mongoose").model('User');
-    User.find({},'username email created',function(err,users){
-        if(err)
+    User.find({}, 'username email created', function(err, users) {
+        if (err)
             return next(err);
-        else{
+        else {
             res.json(users);
         }
     })
 };
-exports.read = function(req,res){
+exports.read = function(req, res) {
     res.json(req.user);
 };
-exports.userByID = function(req,res,next,id){
+exports.userByID = function(req, res, next, id) {
     var User = require("mongoose").model('User');
     User.findOne({
-        _id :id,
-    },function(err,user){
-        if(err)
+        _id: id,
+    }, function(err, user) {
+        if (err)
             return next(err);
-        else{
+        else {
             req.user = user;
             next();
         }
     });
 };
-exports.update = function(req,res,next){
+exports.update = function(req, res, next) {
     var User = require("mongoose").model('User');
-    User.findByIdAndUpdate(req.user.id,req.body,function(err,user){
-        if(err)
+    User.findByIdAndUpdate(req.user.id, req.body, function(err, user) {
+        if (err)
             return next(err);
-        else 
+        else
             res.json(user);
     });
 };
 
-exports.delete = function(req,res,next){
-    req.user.remove(function(err){
-        if(err)
+exports.delete = function(req, res, next) {
+    req.user.remove(function(err) {
+        if (err)
             return next(err);
-        else 
+        else
             res.json(req.user);
     });
 };
-
-
-
-

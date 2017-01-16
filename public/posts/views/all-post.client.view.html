@@ -1,0 +1,65 @@
+<div ng-controller="PostsController" ng-init="find()">
+    <div class="panel panel-default" ng-repeat="post in posts">
+
+        <div class="panel-body">
+            <div class="pull-left">
+                <a href="#">
+                    <img class="media-object img-circle" src="{{post.author.profile_pic}}" width="50px" height="50px" style="margin-right:8px; margin-top:-5px;">
+                </a>
+            </div>
+            <h4><a href="#" style="text-decoration:none;"><strong>{{post.author.fullName}}</strong></a> – <small><small><a href="#" style="text-decoration:none; color:grey;"><i><i class="fa fa-clock-o" aria-hidden="true"></i> {{post.created | date : medium : IST}}</i></a></small></small>
+            </h4>
+            <span>
+                        <div class="navbar-right">
+                            <div class="dropdown">
+                                <button class="btn btn-link btn-xs dropdown-toggle" type="button" id="dd1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <i class="fa fa-cog" aria-hidden="true"></i>
+                                    <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dd1" style="float: right;">
+                <li><a href="#"><i class="fa fa-fw fa-exclamation-triangle" aria-hidden="true"></i> Report</a></li>
+                <li><a href="#"><i class="fa fa-fw fa-ban" aria-hidden="true"></i> Ignore</a></li>
+                <li><a href="#"><i class="fa fa-fw fa-bell" aria-hidden="true"></i> Enable notifications for this post</a></li>
+                <li><a href="#"><i class="fa fa-fw fa-eye-slash" aria-hidden="true"></i> Hide</a></li>
+                <li role="separator" class="divider"></li>
+                <li ng-if="post.author.id === authentication.user.id"><a ng-click="delete(post)"><i class="fa fa-fw fa-trash" aria-hidden="true"></i> Delete</a></li>
+            </ul>
+        </div>
+    </div>
+    </span>
+    <hr>
+    <div class="post-content">
+        <p>
+            <h2>{{post.title}}</h2>
+        </p>
+        <p>{{post.content}}</p>
+    </div>
+    <hr>
+    <div>
+        <div class="pull-right btn-group-xs">
+            <span ng-if="!post.like.likedBy.contains(authentication.user.id)"><a class="btn btn-default btn-xs" ng-click="like(post)"><i class="fa fa-heart" aria-hidden="true"></i> Like &nbsp; <span ng-show="post.like.likeCount > 0" >{{post.like.likeCount}}</span></a>
+            </span>
+            <span ng-if="post.like.likedBy.contains(authentication.user.id)"><a class="btn btn-default btn-xs"><i class="fa fa-check" aria-hidden="true"></i> Liked &nbsp; <span ng-show="post.like.likeCount > 0">{{post.like.likeCount}}</span></a>
+            </span>
+            <a class="btn btn-default btn-xs"><i class="fa fa-retweet" aria-hidden="true"></i> Reshare</a>
+            <a class="btn btn-default btn-xs"><i class="fa fa-comment" aria-hidden="true"></i> Comment</a>
+        </div>
+        <div class="pull-left">
+            <p class="text-muted" style="margin-left:5px;"><i class="fa fa-globe" aria-hidden="true"></i> Public</p>
+        </div>
+        <br>
+    </div>
+    <hr>
+    <div class="media">
+        <div class="pull-left">
+            <a href="#">
+                <img class="media-object img-circle" src="{{authentication.user.profile_pic}} width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+            </a>
+        </div>
+        <div class="media-body">
+            <textarea class="form-control" rows="1" placeholder="Comment"></textarea>
+        </div>
+    </div>
+</div>
+</div>
+</div>

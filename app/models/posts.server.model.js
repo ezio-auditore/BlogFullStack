@@ -2,26 +2,36 @@ var mongoose = require("mongoose"),
     Schema = mongoose.Schema;
 
 var PostSchema = new Schema({
-    title : {
-        type :String,
-        trim :true,
-        default : '',
-        required :'Title cannot be blank'
+    title: {
+        type: String,
+        trim: true,
+        default: '',
+        required: 'Title cannot be blank'
     },
-    content : {
-        type :String,
-        default : '',
-        trim :true,
-        required :true
+    content: {
+        type: String,
+        default: '',
+        trim: true,
+        required: true
     },
-    author : {
-        type : Schema.ObjectId,
-        ref : 'User',
+    like: {
+        likeCount: {
+            type: Number,
+            default: 0,
+        },
+        likedBy: [{
+            type: Schema.ObjectId,
+            ref: 'User',
+        }]
     },
-    created :{
-        type : Date,
-        default : Date.now
+    author: {
+        type: Schema.ObjectId,
+        ref: 'User',
+    },
+    created: {
+        type: Date,
+        default: Date.now
     }
 });
 
-mongoose.model('Post',PostSchema);
+mongoose.model('Post', PostSchema);

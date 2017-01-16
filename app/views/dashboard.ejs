@@ -6,13 +6,14 @@
    <%- include includes/plugins.ejs %>
    <%- include includes/style.ejs %>
 </head>
-<body ng-app = "stark-blog">
+<body>
 <%- include includes/header.ejs %>
 <div style="padding-top:70px;"></div>
 <%- include includes/sidePanel.ejs %>
 <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
 <div ng-include src="'posts/views/create-post.client.view.html'"></div>
-
+<div style="padding-top:20px;"></div>
+<div ng-include src="'posts/views/all-post.client.view.html'"></div>
 </div>
 
 </body>
