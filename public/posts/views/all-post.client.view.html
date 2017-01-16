@@ -39,7 +39,7 @@
         <div class="pull-right btn-group-xs">
             <span ng-if="!post.like.likedBy.contains(authentication.user.id)"><a class="btn btn-default btn-xs" ng-click="like(post)"><i class="fa fa-heart" aria-hidden="true"></i> Like &nbsp; <span ng-show="post.like.likeCount > 0" >{{post.like.likeCount}}</span></a>
             </span>
-            <span ng-if="post.like.likedBy.contains(authentication.user.id)"><a class="btn btn-default btn-xs"><i class="fa fa-check" aria-hidden="true"></i> Liked &nbsp; <span ng-show="post.like.likeCount > 0">{{post.like.likeCount}}</span></a>
+            <span ng-if = "post.like.likedBy.contains(authentication.user.id)"><a class="btn btn-default btn-xs"><i class="fa fa-check" aria-hidden="true"></i> Liked &nbsp; <span ng-show="post.like.likeCount > 0">{{post.like.likeCount}}</span></a>
             </span>
             <a class="btn btn-default btn-xs"><i class="fa fa-retweet" aria-hidden="true"></i> Reshare</a>
             <a class="btn btn-default btn-xs"><i class="fa fa-comment" aria-hidden="true"></i> Comment</a>
