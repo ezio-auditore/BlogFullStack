@@ -1,4 +1,5 @@
-<div ng-controller="PostsController" ng-init="find()">
+<div ng-controller="PostsController">
+    <!--ng - init = "find()-->
     <div class="panel panel-default" ng-repeat="post in posts">
 
         <div class="panel-body">
@@ -39,7 +40,7 @@
         <div class="pull-right btn-group-xs">
             <span ng-if="!post.like.likedBy.contains(authentication.user.id)"><a class="btn btn-default btn-xs" ng-click="like(post)"><i class="fa fa-heart" aria-hidden="true"></i> Like &nbsp; <span ng-show="post.like.likeCount > 0" >{{post.like.likeCount}}</span></a>
             </span>
-            <span ng-if = "post.like.likedBy.contains(authentication.user.id)"><a class="btn btn-default btn-xs"><i class="fa fa-check" aria-hidden="true"></i> Liked &nbsp; <span ng-show="post.like.likeCount > 0">{{post.like.likeCount}}</span></a>
+            <span ng-if="post.like.likedBy.contains(authentication.user.id)"><a class="btn btn-default btn-xs"><i class="fa fa-check" aria-hidden="true"></i> Liked &nbsp; <span ng-show="post.like.likeCount > 0">{{post.like.likeCount}}</span></a>
             </span>
             <a class="btn btn-default btn-xs"><i class="fa fa-retweet" aria-hidden="true"></i> Reshare</a>
             <a class="btn btn-default btn-xs"><i class="fa fa-comment" aria-hidden="true"></i> Comment</a>
@@ -53,7 +54,7 @@
     <div class="media">
         <div class="pull-left">
             <a href="#">
-                <img class="media-object img-circle" src="{{authentication.user.profile_pic}} width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
+                <img class="media-object img-circle" src="{{authentication.user.profile_pic}}" width="35px" height="35px" style="margin-left:3px; margin-right:-5px;">
             </a>
         </div>
         <div class="media-body">

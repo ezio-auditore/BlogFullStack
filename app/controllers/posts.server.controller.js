@@ -9,7 +9,21 @@ exports.create = function(req, res) {
                 message: getErrorMessages(err)
             });
         else {
-            res.json(post);
+            Post.findOne(
+                post._id
+            ).populate('author', 'firstName lastName fullName image profile_pic').exec(function(err, posts) {
+                if (err)
+                    return res.status(400).send({
+                        message: getErrorMessages(err)
+                    });
+                else {
+
+                    return res.json({
+                        'data': posts
+                    });
+                }
+            });
+
 
         }
     });
