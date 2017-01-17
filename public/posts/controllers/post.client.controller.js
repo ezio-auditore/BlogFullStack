@@ -1,18 +1,22 @@
 angular.module('Posts').controller('PostsController', ['$scope', '$routeParams', '$location', 'Authentication', 'PostsFactory', 'notificationFactory', 'LikesFactory', function($scope, $routeParams, $location, Authentication, PostsFactory, notificationFactory, LikesFactory) {
     $scope.authentication = Authentication;
-
+    $scope.posts = [];
     $scope.create = function() {
+
         var post = new PostsFactory({
-            title: this.title,
-            content: this.content
+            title: $scope.post.title,
+            content: $scope.post.content
         });
 
         post.$save(function(response) {
             // $location.path('posts/' + response._id);
-            notificationFactory.success("Succesfully posted");
 
-            $scope.content = '';
-            $scope.title = '';
+            notificationFactory.success("Succesfully posted");
+            $scope.post.content = '';
+            $scope.post.title = '';
+            $scope.posts.unshift(response.data);
+
+
 
         }, function(errorResponse) {
             $scope.error = errorResponse.data.message;
@@ -22,7 +26,12 @@ angular.module('Posts').controller('PostsController', ['$scope', '$routeParams',
 
     $scope.find = function() {
         $scope.posts = PostsFactory.query();
+        // $scope.posts.push(scopeFactory.get('addPostsScope').post);
+
     }
+    PostsFactory.query({}, function(data) {
+        $scope.posts = data;
+    });
 
     $scope.findOne = function() {
         $scope.post = PostsFactory.get({
@@ -62,17 +71,26 @@ angular.module('Posts').controller('PostsController', ['$scope', '$routeParams',
                 notificationFactory.error($scope.error);
             });
         }
-    }
+    };
     $scope.like = function(post) {
         var like = new LikesFactory(post);
         like.$update(function() {
             notificationFactory.success("Successfully liked");
-            $scope.post.like.likeCount++;
+            post.like.likeCount++;
+            post.like.likedBy.push($scope.authentication.user.id);
         }, function(errorResponse) {
             $scope.error = errorResponse.data.message;
             notificationFactory.error($scope.error);
         });
-    }
+    };
 
+    $scope.showLikeButton = function(post) {
+        if (post.like.likedBy.indexOf($scope.authentication.user.id) >= 0) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
 
 }]);
