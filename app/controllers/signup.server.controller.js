@@ -1,143 +1,149 @@
 /**
  * Created by tonyStark on 1/4/2017.
  */
-exports.render = function(req,res){
-    res.render('signup',{
-        signup_title : 'Sign up',
-        title1 : 'Stark',
-        title2:'App',
-        referer:'login',
-        messages : [],
-        userFullName :  req.user ? req.user.fullName.split(' ')[0] : ''
+exports.render = function(req, res) {
+    res.render('signup', {
+        signup_title: 'Sign up',
+        title1: 'Stark',
+        title2: 'App',
+        referer: 'login',
+        messages: [],
+        userFullName: req.user ? req.user.fullName.split(' ')[0] : ''
     })
 }
-var getErrorMessages = function(err){
+var getErrorMessages = function(err) {
     var message = [];
-    if(err.code){
+    if (err.code) {
         switch (err.code) {
             case 11000:
             case 11001:
-                message='Username already exists'
+                message = 'Username already exists'
                 break;
-            
+
             default:
-                message:'Something went wrong'
+                message: 'Something went wrong'
         }
     }
-    else{
-        for(var errName in err.errors){
-            if(err.errors[errName].message)
+    else {
+        for (var errName in err.errors) {
+            if (err.errors[errName].message)
                 message = err.errors[errName].message;
-            
+
         }
     }
     return message;
 }
-exports.renderSignin = function(req,res,next){
-    if(!req.user){
-        res.render('signup',{
-        signup_title : 'Login',
-        title1 : 'Stark',
-        title2:'App',
-        referer:'login',
-        messages : req.flash('error')|| req.flash('info'),
-        userFullName :  req.user ? req.user.fullName.split(' ')[0] : '',
-        user :  req.user ? JSON.stringify(req.user) : ''
-    });
-    }else{
+exports.renderSignin = function(req, res, next) {
+    if (!req.user) {
+        res.render('signup', {
+            signup_title: 'Login',
+            title1: 'Stark',
+            title2: 'App',
+            referer: 'login',
+            messages: req.flash('error') || req.flash('info'),
+            userFullName: req.user ? req.user.fullName.split(' ')[0] : '',
+            user: req.user ? JSON.stringify(req.user) : ''
+        });
+    }
+    else {
         return res.redirect('/');
     }
 };
-exports.renderSignup = function(req,res,next){
-    if(!req.user){
-        res.render('signup',{
-        signup_title : 'Signup',
-        title1 : 'Stark',
-        title2:'App',
-        referer:'login',
-        messages : req.flash('error'),
-            user :  req.user ? JSON.stringify(req.user) : ''
-    });
-    }else{
+exports.renderSignup = function(req, res, next) {
+    if (!req.user) {
+        res.render('signup', {
+            signup_title: 'Signup',
+            title1: 'Stark',
+            title2: 'App',
+            referer: 'login',
+            messages: req.flash('error'),
+            user: req.user ? JSON.stringify(req.user) : ''
+        });
+    }
+    else {
         return res.redirect('/');
     }
 };
 
-exports.signup = function(req,res,next){
+exports.signup = function(req, res, next) {
     var User = require("mongoose").model('User');
-    
-    if(!req.user){
+
+    if (!req.user) {
         var user = new User(req.body);
         console.log(req.body);
         var messages = null;
         user.provider = 'local';
-        user.save(function(err){
-            if(err){
+        user.save(function(err) {
+            if (err) {
                 console.log(err);
                 messages = getErrorMessages(err);
                 //console.log(messages);
-                req.flash('error',messages);
+                req.flash('error', messages);
                 return res.redirect('/signupAuth')
-            }else{
-            req.login(user,function(err){
-                if(err) return next(err);
-                return res.redirect('/');
-            });
-        }
+            }
+            else {
+                req.login(user, function(err) {
+                    if (err) return next(err);
+                    return res.redirect('/');
+                });
+            }
         });
-    }else{
+    }
+    else {
         res.redirect('/');
     }
 };
-exports.signout = function(req,res){
-    console.log(req.user.fullName+' has logged out');
+exports.signout = function(req, res) {
+    console.log(req.user.fullName + ' has logged out');
     req.logout();
     res.redirect('/');
 }
 
-exports.saveOAuthUserProfile = function(req,res,profile,done){
+exports.saveOAuthUserProfile = function(req, res, profile, done) {
     var User = require("mongoose").model('User');
     User.findOne({
         /*provider : profile.provider,
         providerId : profile.providerId,*/
-        email : profile.email/*,
-        username : profile.username*/
-    },function(err,user){
-        if(err)
+        email: profile.email
+            /*,
+                    username : profile.username*/
+    }, function(err, user) {
+        if (err)
             return done(err);
-        else{
-            if(!user){
-              
-               var possibleUsername = profile.username || ((profile.email) ? profile.email.split('@')[0] : '');
-               User.findUniqueUsername(possibleUsername,null,function(availableUsername){
-                   console.log('available user name'+availableUsername);
-                   profile.username = availableUsername;
-                   user = new User(profile);
-                   user.save(function(err){
-                       if(err) {
-                       var message = getErrorMessages(err);
-                       console.log("Error in saving profile:"+message);
-                            req.flash('error',message);
-                           return res.redirect('/signupAuth');
-                          // return done(err);
-                       }else{
-                       console.log("Sending done after new-user save ");
-                       return done(null,user);
-                       }
-                   });
-               });
+        else {
+            if (!user) {
+
+                var possibleUsername = profile.username || ((profile.email) ? profile.email.split('@')[0] : '');
+                User.findUniqueUsername(possibleUsername, null, function(availableUsername) {
+                    console.log('available user name' + availableUsername);
+                    profile.username = availableUsername;
+                    user = new User(profile);
+                    user.save(function(err) {
+                        if (err) {
+                            var message = getErrorMessages(err);
+                            console.log("Error in saving profile:" + message);
+                            req.flash('error', message);
+                            return res.redirect('/signupAuth');
+                            // return done(err);
+                        }
+                        else {
+                            console.log("Sending done after new-user save ");
+                            return done(null, user);
+                        }
+                    });
+                });
             }
-            else{
-            return done(null,user);
+            else {
+                return done(null, user);
             }
         }
     });
 };
 
-exports.requiresLogin = function(req,res,next){
-    if(!req.isAuthenticated()){
+exports.requiresLogin = function(req, res, next) {
+    if (!req.isAuthenticated()) {
         return res.status(400).send({
-            message : 'User is not logged in'
+            message: 'User is not logged in'
         });
     }
     next();

@@ -48,7 +48,7 @@ exports.postbyID = function(req, res, next, id) {
     console.log(id);
     Post.findOne({
         _id: id
-    }).populate('creator', 'firstName lastName fullName').exec(function(err, post) {
+    }).populate('author', 'firstName lastName fullName image profile_pic').exec(function(err, post) {
         if (err)
             return next(err);
         if (!post) return next(new Error('Failed to load post ' + id));
@@ -59,6 +59,7 @@ exports.postbyID = function(req, res, next, id) {
         }
     });
 };
+
 
 exports.read = function(req, res) {
     res.json(req.post);
@@ -131,9 +132,7 @@ var getErrorMessages = function(err) {
 };
 
 exports.hasAuthorization = function(req, res, next) {
-    console.log("req.post.author.id : " + req.post.author);
-    console.log("req.user.id : " + req.user.id);
-    if (req.post.author != req.user.id) {
+    if (req.post.author.id != req.user.id) {
         return res.status(403).send({
             message: 'User is not authorized'
         });

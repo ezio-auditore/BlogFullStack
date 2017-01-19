@@ -1,1 +1,1 @@
-angular.module('Posts',[]);
+angular.module('Posts', ['firebase']);
