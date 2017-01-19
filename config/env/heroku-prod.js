@@ -19,5 +19,9 @@ module.exports = {
         api_key: 'key-e603bc0f2eb0205d894656e8639981c6',
         domain: 'app7b039cf806744803aabb63cef2a8ea5e.mailgun.org',
         receiver: 'pupunmajumder@gmail.com;chatterjeedebjani93@yahoo.com'
+    },
+    firebase: {
+        api_key: 'AIzaSyCrcPtjC7uhifW_Mdwh0cDcNxumWMfOmj8',
+        authDomain: 'stark-blog-154810'
     }
 };
