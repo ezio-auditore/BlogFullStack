@@ -10,14 +10,22 @@ angular.module('Posts').controller('PostsController', ['$scope', '$routeParams',
     firebase.initializeApp(config);
 
     var rootRef = firebase.database().ref('/posts');
+
+    var likesRef = firebase.database().ref('/likes');
+
     $scope.postArrayRef = $firebaseArray(rootRef);
 
     $scope.postArrayRef.$watch(function(event) {
         console.log(event);
+
         if (event.event == 'child_added') {
+            $scope.findOne(event.key, function(post) {
+                $scope.posts.unshift(post);
+                console.log('Added');
+            });
             console.log(event.key);
-            var post = $scope.findOne(event.key);
-            $scope.posts.unshift(post);
+
+
         }
         else if (event.event == 'child_removed') {
 
@@ -30,6 +38,33 @@ angular.module('Posts').controller('PostsController', ['$scope', '$routeParams',
 
                 }
             }
+        }
+        else if (event.event == 'child_changed') {
+            $scope.findOne(event.key, function(post) {
+                for (var i in $scope.posts) {
+                    if ($scope.posts[i]._id === event.key) {
+
+                        console.log('Changed');
+                        /*if ($scope.authentication.user.id == $scope.posts[i].author.id) {
+                            notificationFactory.success('You Liked a post')
+                        
+                            console.log("I Changed");
+                        
+                        }*/
+                        /*else {
+                        
+                            notificationFactory.info($scope.authentication.user.usernam + ' liked your post :' + $scope.posts[i].title);
+                            console.log("  he Changed");
+                        }*/
+                        $scope.posts[i] = post;
+
+
+                    }
+
+                }
+            });
+
+
         }
     });
 
@@ -63,10 +98,11 @@ angular.module('Posts').controller('PostsController', ['$scope', '$routeParams',
             $scope.posts = data;
         });*/
 
-    $scope.findOne = function(postID) {
-        return PostsFactory.get({
+    $scope.findOne = function(postID, cb) {
+        return cb(PostsFactory.get({
             postID: postID
-        });
+        }));
+
     };
 
     $scope.update = function() {
@@ -100,7 +136,7 @@ angular.module('Posts').controller('PostsController', ['$scope', '$routeParams',
     $scope.like = function(post) {
         var like = new LikesFactory(post);
         like.$update(function() {
-            notificationFactory.success("Successfully liked");
+
             post.like.likeCount++;
             post.like.likedBy.push($scope.authentication.user.id);
         }, function(errorResponse) {

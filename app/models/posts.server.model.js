@@ -38,16 +38,16 @@ var PostSchema = new Schema({
 });
 PostSchema.post('save', function() {
     var post = this;
-    var postList = database.ref('posts/');
+    var postList = database.ref('posts/' + post._id);
     postList.once('value', function(snapshot) {
         if ((snapshot.val() == null)) {
-            var newPostRef = database.ref('posts/' + post._id).push();
+            var newPostRef = database.ref('posts/' + post._id + '/').push();
             var firebasePost = {
                 'author': post.author.id,
                 'title': post.title,
                 'content': post.content,
                 'like': {
-                    likedBy: post.like.likedBy.filter(getAuthorIdfromList),
+
                     likeCount: post.like.likeCount
                 }
             };
@@ -55,30 +55,29 @@ PostSchema.post('save', function() {
             newPostRef.set(firebasePost);
         }
         else {
-            var newPostRef = database.ref('posts/').push();
+            var oldPostRef = database.ref('posts/' + post._id);
             var firebasePost = {
                 'author': post.author.id,
                 'title': post.title,
                 'content': post.content,
                 'like': {
-                    likedBy: post.like.likedBy.filter(getAuthorIdfromList),
-                    likeCount: post.like.likeCount
+                    'likedBy': post.like.likedBy.filter(getAuthorIdfromList),
+                    'likeCount': post.like.likeCount
                 }
-            };
-
-            newPostRef.set(firebasePost);
+            }
+            oldPostRef.set(firebasePost);
         }
     });
 
 
 });
 var getAuthorIdfromList = function(author) {
-    return author;
+    return author.id;
 }
 
-PostSchema.post('remove', function() {
+PostSchema.pre('remove', function(next) {
     var oldPostRef = database.ref('posts/' + this._id)
     oldPostRef.remove();
-
+    next();
 })
 mongoose.model('Post', PostSchema);
